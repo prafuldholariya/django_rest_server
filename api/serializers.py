@@ -1,7 +1,9 @@
-from rest_framework import serializers
+from rest_framework import serializers, status
+from rest_framework.response import Response
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,6 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])  # Hash password
         user.save()
         return user
+
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
